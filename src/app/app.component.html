@@ -1,5 +1,34 @@
-<h1>Products</h1>
-<app-search></app-search>
-<app-product *ngFor="let product of products" [product]="product" (addToCart)="onAddToCart($event)">
-</app-product>
-<app-cart [items]="cartItems"></app-cart>
+<mat-toolbar color="primary">
+    <span>Persona Material Demo</span>
+    <span class="spacer"></span>
+    <mat-slide-toggle [checked]="persona.preferences.darkMode" (change)="toggleDarkMode($event.checked)"
+        color="accent">Dark</mat-slide-toggle>
+</mat-toolbar>
+
+<div class="content">
+    <mat-card>
+        <mat-card-title>Pilih Role Pengguna</mat-card-title>
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select [value]="persona.preferences.role" (selectionChange)="onRoleChange($event.value)">
+                    <mat-option *ngFor="let r of roles" [value]="r">
+                        {{ r | titlecase }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mt">
+        <mat-card-title>Halo, {{ persona.preferences.role | titlecase }}!</mat-card-title>
+        <mat-card-content>
+            <p *ngIf="persona.preferences.role === 'auditor'">
+                Mode auditor aktif. Disarankan menggunakan tampilan gelap untuk kenyamanan mata.
+            </p>
+            <p *ngIf="persona.preferences.role !== 'auditor'">
+                Silakan gunakan aplikasi ini sesuai kebutuhan Anda.
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
