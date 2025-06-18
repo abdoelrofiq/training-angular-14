@@ -1,52 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { UserPersonaService } from './services/user-persona.service';
-import { FormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
+import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatToolbarModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatCardModule
-  ],
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'proyek-pertamaku';
-  roles = ['guest', 'auditor', 'admin'] as const;
-
-  constructor(public persona: UserPersonaService) { }
-
-  ngOnInit() {
-    this.applyTheme();
-  }
-
-  onRoleChange(role: any) {
-    this.persona.update({ role });
-  }
-
-  toggleDarkMode(dark: boolean) {
-    this.persona.update({ darkMode: dark });
-    this.applyTheme();
-  }
-
-  private applyTheme() {
-    if (this.persona.preferences.darkMode) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
-  }
-}
+export class AppComponent { }

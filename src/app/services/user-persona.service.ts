@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
 
-export interface UserPreferences {
-    role: 'guest' | 'auditor' | 'admin';
-    darkMode: boolean;
+export interface UserPersona {
+  role: 'bendahara' | 'auditor' | 'admin';
+  prefersDarkMode: boolean;
+  name: string;
 }
 
-const STORAGE_KEY = 'userPreferences';
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class UserPersonaService {
-    private prefs: UserPreferences = { role: 'guest', darkMode: false };
+  private persona: UserPersona = {
+    role: 'auditor',
+    prefersDarkMode: false,
+    name: 'Pengguna SAKTI'
+  };
 
-    constructor() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            this.prefs = JSON.parse(stored);
-        }
-    }
+  getUserPersona(): UserPersona {
+    return this.persona;
+  }
 
-    get preferences(): UserPreferences {
-        return this.prefs;
-    }
-
-    update(prefs: Partial<UserPreferences>) {
-        this.prefs = { ...this.prefs, ...prefs };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.prefs));
-    }
+  setUserPersona(persona: UserPersona): void {
+    this.persona = persona;
+  }
 }
