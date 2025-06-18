@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ResponsiveCardComponent } from './responsive-card/responsive-card.component';
+import { RupiahPipe } from './rupiah.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
-    ResponsiveCardComponent
-  ],
+      RupiahPipe
+   ],
   imports: [
-    BrowserModule,
-    FormsModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
