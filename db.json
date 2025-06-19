@@ -1,14 +1,19 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Laptop",
-      "price": 15000000
+      "name": "123",
+      "price": 1,
+      "id": "1"
     },
     {
       "id": "3af7",
       "name": "test",
       "price": 123
+    },
+    {
+      "id": "7dc4",
+      "name": "123",
+      "price": 3
     }
   ]
 }

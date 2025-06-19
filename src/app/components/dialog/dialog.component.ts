@@ -9,9 +9,17 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dialog.component.html',
   imports: [CommonModule, MatDialogModule, MatButtonModule]
 })
-export class ConfirmDialogComponent {
+export class DialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { message: string, isConfirm?: boolean, header?: string }
   ) { }
+
+  ngOnInit(): void {
+    if (this.data.isConfirm === false) {
+      setTimeout(() => {
+        this.dialogRef.close(false);
+      }, 2000);
+    }
+  }
 }

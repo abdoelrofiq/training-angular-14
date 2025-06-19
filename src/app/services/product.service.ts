@@ -4,10 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' }) export class ProductService {
-    private apiUrl = 'http://localhost:3000/products';
+    private apiUrl = 'http://localhost:3001/products';
     constructor(private http: HttpClient) { }
-    getProducts(): Observable<any[]> {
-        return this.http.get<any[]>(this.apiUrl).pipe(catchError(error => {
+    getProducts(): Observable<any> {
+        return this.http.get<any[]>(this.apiUrl + '?page=1&limit=1000').pipe(catchError(error => {
             console.error('Error fetching products', error); return throwError(() => error);
         })
         );
@@ -20,7 +20,7 @@ import { catchError } from 'rxjs/operators';
         return this.http.post<any>(this.apiUrl, product);
     }
     updateProduct(id: number, product: any): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/${id}`, product);
+        return this.http.patch<any>(`${this.apiUrl}/${id}`, product);
     }
     deleteProduct(id: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrl}/${id}`);

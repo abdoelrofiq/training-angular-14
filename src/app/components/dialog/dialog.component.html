@@ -1,6 +1,11 @@
-<h2 mat-dialog-title>Konfirmasi</h2>
+<h2 mat-dialog-title>{{ data.header ? data.header : 'Konfirmasi' }}</h2>
 <mat-dialog-content>{{ data.message }}</mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button (click)="dialogRef.close(false)">Batal</button>
-    <button mat-raised-button color="warn" (click)="dialogRef.close(true)">Hapus</button>
+    <ng-container *ngIf="data?.isConfirm">
+        <button mat-button (click)="dialogRef.close(false)">Batal</button>
+        <button mat-raised-button color="warn" (click)="dialogRef.close(true)">Hapus</button>
+    </ng-container>
+    <ng-container *ngIf="!data?.isConfirm">
+        <button mat-button (click)="dialogRef.close(true)">Ok</button>
+    </ng-container>
 </mat-dialog-actions>

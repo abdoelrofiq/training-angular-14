@@ -19,7 +19,8 @@
     </mat-form-field>
 
     <div class="button-row">
-        <button mat-raised-button color="primary" type="submit" (click)="submit()">Simpan</button>
-        <button mat-raised-button style="margin-left: 10px" (click)="productForm.reset()">Batal</button>
+        <button mat-raised-button color="primary" type="submit" (click)="submit()">{{ isCreate ? 'Simpan' :
+            'Update'}} </button>
+        <button mat-raised-button style="margin-left: 10px" (click)="cancel()">Batal</button>
     </div>
 </form>

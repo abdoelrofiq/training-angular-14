@@ -12,7 +12,7 @@ describe('FormComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.FormComponent(FormComponent);
+    fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
