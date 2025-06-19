@@ -1,30 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from './services/product.service';
-import { Product } from './components/product/product.model';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from './components/product/product.component';
-import { CartComponent } from './components/cart/cart.component';
-import { SearchComponent } from './components/search/search.component';
+import { ProductCrudComponent } from './components/product/product.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ProductComponent, CartComponent, SearchComponent],
+  imports: [CommonModule, ProductCrudComponent, RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  products: Product[] = [];
-  cartItems: Product[] = [];
-  constructor(private productService: ProductService) { }
+export class AppComponent {
 
-  ngOnInit() {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-    });
-  }
-
-  onAddToCart(product: any) {
-    console.log('Added to cart:', product);
-    this.cartItems.push(product);
-  }
 }

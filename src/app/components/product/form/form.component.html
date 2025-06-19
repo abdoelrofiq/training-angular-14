@@ -1,0 +1,25 @@
+<form class="form" [formGroup]="productForm">
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Nama Produk</mat-label>
+        <input matInput placeholder="Laptop" formControlName="name">
+        <mat-error *ngIf="productForm.get('name')?.hasError('required') && productForm.get('name')?.touched">
+            Nama Produk wajib diisi.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Harga</mat-label>
+        <input matInput type="number" min="0" formControlName="price">
+        <mat-error *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched">
+            Harga wajib diisi.
+        </mat-error>
+        <mat-error *ngIf="productForm.get('price')?.hasError('min') && productForm.get('price')?.touched">
+            Harga tidak boleh kurang dari 0.
+        </mat-error>
+    </mat-form-field>
+
+    <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" (click)="submit()">Simpan</button>
+        <button mat-raised-button style="margin-left: 10px" (click)="productForm.reset()">Batal</button>
+    </div>
+</form>

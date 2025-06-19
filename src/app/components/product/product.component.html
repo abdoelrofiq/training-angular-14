@@ -1,7 +1,3 @@
-<div class="product">
-    <h3>{{ product.name }}</h3>
-    <img src="{{ product.image }}" alt="{{ product.name }}" width="200">
-    <p>Description: {{ product.description }}</p>
-    <p>Price: {{ product.price }}</p>
-    <button (click)="addToCart.emit(product)">Add to Cart</button>
-</div>
+<h1>Daftar Produk</h1>
+<product-form #productForm (saved)="productList.loadData()"></product-form>
+<product-list #productList (edit)="productForm.editProduct($event)"></product-list>
