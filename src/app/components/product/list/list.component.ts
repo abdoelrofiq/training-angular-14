@@ -53,4 +53,14 @@ export class ListComponent implements OnInit {
             }
         });
     }
+
+    search(event: any) {
+        const query = event.target.value;
+        this.productService.getProducts().subscribe(data => {
+            this.dataSource = data.filter(p => p.name.toLowerCase().includes(query.toLowerCase())).map((p, idx) => ({
+                ...p,
+                position: idx + 1
+            }));
+        });
+    }
 }
