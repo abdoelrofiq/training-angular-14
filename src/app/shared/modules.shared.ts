@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 export const sharedImports = [
     CommonModule,
@@ -14,4 +16,6 @@ export const sharedImports = [
     MatButtonModule,
     MatTableModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatCardModule
 ];

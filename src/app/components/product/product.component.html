@@ -1,3 +1,5 @@
-<h1>Daftar Produk</h1>
-<product-form #productForm (saved)="productList.loadData()"></product-form>
+<div class="header">
+    <h1>Daftar Produk</h1><button mat-raised-button color="warn" (click)="logout()">Logout</button>
+</div>
+<product-form #productForm (saved)="productList.resetTable()"></product-form>
 <product-list #productList (edit)="productForm.editProduct($event)"></product-list>

@@ -11,29 +11,29 @@ class ActionsMethod {
 		let newOperator = null;
 		let newValue = null;
 		switch (row.operator) {
-		case '=':
-			newOperator = Op.eq;
-			newValue = row.value;
-			break;
-		case '!=':
-			newOperator = Op.ne;
-			newValue = row.value;
-			break;
-		case 'IN':
-			newOperator = Op.in;
-			newValue = row.value;
-			break;
-		case 'NOT NULL':
-			newOperator = Op.ne;
-			newValue = null;
-			break;
-		case 'CONTAINS':
-			newOperator = Op.like;
-			newValue = `%${row.value}%`;
-			break;
-		default:
-			newOperator = row.operator;
-			newValue = row.value;
+			case '=':
+				newOperator = Op.eq;
+				newValue = row.value;
+				break;
+			case '!=':
+				newOperator = Op.ne;
+				newValue = row.value;
+				break;
+			case 'IN':
+				newOperator = Op.in;
+				newValue = row.value;
+				break;
+			case 'NOT NULL':
+				newOperator = Op.ne;
+				newValue = null;
+				break;
+			case 'CONTAINS':
+				newOperator = Op.iLike;
+				newValue = `%${row.value}%`;
+				break;
+			default:
+				newOperator = row.operator;
+				newValue = row.value;
 		}
 
 		return { newOperator, newValue };

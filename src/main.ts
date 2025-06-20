@@ -7,6 +7,8 @@ import { provideRouter } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -14,6 +16,11 @@ bootstrapApplication(AppComponent, {
       positionClass: 'toast-bottom-right',
       timeOut: 3000
     })),
-    provideRouter(appRoutes)
+    provideRouter(appRoutes),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ]
 }).catch(err => console.error(err));

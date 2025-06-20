@@ -22,3 +22,10 @@
 .btn:active {
     background-color: #0a58ca;
 }
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px
+}

@@ -15,7 +15,9 @@ class ProductService extends Models {
 			});
 
 			req.products = createGetDatasResponse(productsData, [], {
-				totalAllData: await this.connection.product.count(),
+				totalAllData: await this.connection.product.count({}, req.FQP, {
+					...req.query,
+				}),
 				query: req.query,
 			});
 			next();

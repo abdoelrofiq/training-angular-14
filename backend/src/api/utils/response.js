@@ -20,7 +20,7 @@ exports.createGetDatasResponse = (data, omittedAttributes = [], options) => {
 			);
 		}
 		pagination.limit = isNaN(limit) ? limit : Number(limit);
-		pagination.totalRows = result.length;
+		pagination.totalRows = options.totalAllData;
 	}
 
 	return {
