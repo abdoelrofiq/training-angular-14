@@ -1,4 +1,4 @@
-<input matInput placeholder="Cari Produk" (keyup)="search($event)" class="search-input" />
+<input matInput placeholder="Cari Produk" (keyup)="search($event)" class="search-input" [(ngModel)]="searchField" />
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef style="width: 7%"> No. </th>

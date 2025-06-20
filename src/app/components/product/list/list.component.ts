@@ -8,13 +8,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { firstValueFrom } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     standalone: true,
     selector: 'product-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.css'],
-    imports: [CommonModule, RupiahPipe, ...sharedImports]
+    imports: [CommonModule, RupiahPipe, ...sharedImports, FormsModule]
 })
 
 export class ListComponent {
@@ -26,6 +27,7 @@ export class ListComponent {
     defaultPageSize: number = 5;
     currentPage: number = 1;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
+    searchField: string = '';
 
     async ngAfterViewInit() {
         await this.loadData(this.currentPage, this.defaultPageSize);
@@ -68,15 +70,21 @@ export class ListComponent {
         });
     }
 
-    async search(event: any) {
-        const query = event.target.value;
+    searchBuilder(parameter: any): string {
         let searchTerm = '';
 
-        if (!isNaN(query) && query !== '') {
-            searchTerm = `name CONTAINS "${query}" OR price = ${query}`;
+        if (!isNaN(parameter) && parameter !== '') {
+            searchTerm = `name CONTAINS "${parameter}" OR price = ${parameter}`;
         } else {
-            searchTerm = `name CONTAINS "${query}"`;
+            searchTerm = `name CONTAINS "${parameter}"`;
         }
+
+        return searchTerm;
+    }
+
+    async search(event: any) {
+        const query = event.target.value;
+        const searchTerm = this.searchBuilder(query);
 
         this.paginator.firstPage();
         await this.loadData(this.currentPage, this.defaultPageSize, searchTerm);
@@ -86,7 +94,9 @@ export class ListComponent {
         console.log('Page index:', event.pageIndex);
         console.log('Page size:', event.pageSize);
         console.log('Previous page index:', event.previousPageIndex);
-        await this.loadData(event.pageIndex + 1, event.pageSize);
+
+        const searchTerm = this.searchBuilder(this.searchField);
+        await this.loadData(event.pageIndex + 1, event.pageSize, searchTerm);
     }
 
     async resetTable() {
